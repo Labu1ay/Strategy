@@ -2,32 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectbleObject : MonoBehaviour
-{
+public class SelectbleObject : MonoBehaviour {
     public GameObject SelectbleIndicator;
 
-    void Start()
-    {
+    void Start() {
         SelectbleIndicator.SetActive(false);
     }
-    public virtual void OnHover()
-    {
+    public virtual void OnHover() {
         transform.localScale = Vector3.one * 1.1f;
     }
-    public virtual void OnUnhover()
-    {
+    public virtual void OnUnhover() {
         transform.localScale = Vector3.one;
     }
 
-    public virtual void Select()
-    {
+    public virtual void Select() {
         SelectbleIndicator.SetActive(true);
     }
-    public virtual void Unselect()
-    {
+    public virtual void Unselect() {
         SelectbleIndicator.SetActive(false);
     }
-    public virtual void OnClickOnGround(Vector3 point)
-    {
+    public virtual void OnClickOnGround(Vector3 point) {
     }
 }
