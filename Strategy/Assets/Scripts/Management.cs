@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Management : MonoBehaviour
 {
@@ -8,6 +9,14 @@ public class Management : MonoBehaviour
     public SelectbleObject Howered;
     public List<SelectbleObject> ListOfSelected = new List<SelectbleObject>();
 
+    public Image FrameImage;
+    private Vector2 _frameStart;
+    private Vector2 _frameEnd;
+
+    private void Start()
+    {
+        FrameImage.enabled = false;
+    }
     void Update()
     {
         Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
@@ -61,7 +70,46 @@ public class Management : MonoBehaviour
         {
             UnselectAll();
         }
-        
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            _frameStart = Input.mousePosition;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            _frameEnd = Input.mousePosition;
+
+            Vector2 min = Vector2.Min(_frameStart, _frameEnd);
+            Vector2 max = Vector2.Max(_frameStart, _frameEnd);
+            Vector2 size = max - min;
+
+            if (size.magnitude > 10)
+            {
+                FrameImage.enabled = true;
+
+                FrameImage.rectTransform.anchoredPosition = min;
+                FrameImage.rectTransform.sizeDelta = size;
+
+                UnselectAll();
+                Rect rect = new Rect(min, size);
+                Unit[] allUnits = FindObjectsOfType<Unit>();
+                for (int i = 0; i < allUnits.Length; i++)
+                {
+                    Vector2 screenPosition = Camera.WorldToScreenPoint(allUnits[i].transform.position);
+                    if (rect.Contains(screenPosition))
+                    {
+                        Select(allUnits[i]);
+                    }
+                }
+            } 
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            FrameImage.enabled = false;
+        }
+
     }
 
     void Select(SelectbleObject selectbleObject)
