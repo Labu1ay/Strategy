@@ -6,6 +6,7 @@ public class Management : MonoBehaviour
 {
     public Camera Camera;
     public SelectbleObject Howered;
+    public List<SelectbleObject> ListOfSelected = new List<SelectbleObject>();
 
     void Update()
     {
@@ -33,16 +34,57 @@ public class Management : MonoBehaviour
                     Howered.OnHover();
                 }
             }
-            else
+            else UnhoverCurrent();
+            
+        }
+        else UnhoverCurrent();
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (Howered)
             {
-                UnhoverCurrent();
+                if (Input.GetKey(KeyCode.LeftControl) == false) 
+                {
+                    UnselectAll();
+                }
+                Select(Howered);
+            }
+            if (hit.collider.tag == "Ground")
+            {
+                for (int i = 0; i < ListOfSelected.Count; i++)
+                {
+                    ListOfSelected[i].OnClickOnGround(hit.point);
+                }
             }
         }
-        else
+        if (Input.GetMouseButtonDown(1))
         {
-            UnhoverCurrent();
+            UnselectAll();
+        }
+        
+    }
+
+    void Select(SelectbleObject selectbleObject)
+    {
+
+        if (ListOfSelected.Contains(selectbleObject) == false)
+        {
+            ListOfSelected.Add(selectbleObject);
+            selectbleObject.Select();
         }
     }
+    
+
+    
+    void UnselectAll()
+    {
+        for (int i = 0; i < ListOfSelected.Count; i++)
+        {
+            ListOfSelected[i].Unselect();
+        }
+        ListOfSelected.Clear();
+    }
+
 
     void UnhoverCurrent()
     {
