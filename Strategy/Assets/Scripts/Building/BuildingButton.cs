@@ -11,6 +11,8 @@ public class BuildingButton : MonoBehaviour
         if (Resources.S.Money >= price) {
             Resources.S.Money -= price;
             BuildingPlacer.S.CreateBuilding(BuildingPrefab);
+        } else {
+            Debug.Log("No Money");
         }
     }
 }

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectbleIndicator: {fileID: 3704008677258857899}
+  Price: 5
   NavMeshAgent: {fileID: 2639138512828754263}
 --- !u!195 &2639138512828754263
 NavMeshAgent:
