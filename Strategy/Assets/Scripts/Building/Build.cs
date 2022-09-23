@@ -8,7 +8,7 @@ public class Build : SelectbleObject {
     public int ZSize = 3;
 
     private void OnDrawGizmos() {
-        float cellSize = FindObjectOfType<BuildingPlacer>().CellSize;
+        float cellSize = BuildingPlacer.S.CellSize;
 
         for (int x = 0; x < XSize; x++) {
             for (int z = 0; z < ZSize; z++) {
