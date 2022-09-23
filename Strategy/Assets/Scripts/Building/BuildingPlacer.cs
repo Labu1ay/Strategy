@@ -34,10 +34,28 @@ public class BuildingPlacer : MonoBehaviour {
 
         CurrentBuild.transform.position = new Vector3(x, 0f, z) * CellSize;
 
-        if (Input.GetMouseButtonDown(0)) {
-            InstallBuilding(x, z, CurrentBuild);
-            CurrentBuild = null;
+        if (CheckAllow(x, z, CurrentBuild)) {
+            CurrentBuild.DisplayAcceptablePosition();
+
+            if (Input.GetMouseButtonDown(0)) {
+                InstallBuilding(x, z, CurrentBuild);
+                CurrentBuild = null;
+            }
+        } else {
+            CurrentBuild.DisplayUnacceptablePosition();
         }
+    }
+
+    bool CheckAllow(int xPosition, int zPosition, Build building) {
+        for (int x = 0; x < building.XSize; x++) {
+            for (int z = 0; z < building.ZSize; z++) {
+                Vector2Int coordinate = new Vector2Int(xPosition + x, zPosition + z);
+                if (BuildingsDictionary.ContainsKey(coordinate)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     void InstallBuilding(int xPosition, int zPosition, Build building) {
