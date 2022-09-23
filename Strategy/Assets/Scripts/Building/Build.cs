@@ -7,6 +7,12 @@ public class Build : SelectbleObject {
     public int XSize = 3;
     public int ZSize = 3;
 
+    private Color _startColor;
+    public Renderer Renderer;
+    private void Awake() {
+        _startColor = Renderer.material.color;
+    }
+
     private void OnDrawGizmos() {
         float cellSize = BuildingPlacer.S.CellSize;
 
@@ -16,5 +22,12 @@ public class Build : SelectbleObject {
             }
         }
        
+    }
+
+    public void DisplayUnacceptablePosition() {
+        Renderer.material.color = Color.red;
+    }
+    public void DisplayAcceptablePosition() {
+        Renderer.material.color = _startColor;
     }
 }

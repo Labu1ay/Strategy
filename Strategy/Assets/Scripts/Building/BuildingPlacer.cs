@@ -10,6 +10,8 @@ public class BuildingPlacer : MonoBehaviour {
     private Plane _plane;
 
     public Build CurrentBuild;
+
+    public Dictionary<Vector2Int, Build> BuildingsDictionary = new Dictionary<Vector2Int, Build>();
     void Start() {
         S = this;
         _plane = new Plane(Vector3.up, Vector3.zero);
@@ -33,7 +35,21 @@ public class BuildingPlacer : MonoBehaviour {
         CurrentBuild.transform.position = new Vector3(x, 0f, z) * CellSize;
 
         if (Input.GetMouseButtonDown(0)) {
+            InstallBuilding(x, z, CurrentBuild);
             CurrentBuild = null;
+        }
+    }
+
+    void InstallBuilding(int xPosition, int zPosition, Build building) {
+        for (int x = 0; x < building.XSize; x++) {
+            for (int z = 0; z < building.ZSize; z++) {
+                Vector2Int coordinate = new Vector2Int(xPosition + x, zPosition + z);
+                BuildingsDictionary.Add(coordinate, building);
+            }
+
+        }
+        foreach (var item in BuildingsDictionary) {
+            Debug.Log(item);
         }
     }
     public void CreateBuilding(GameObject buildingPrefab) {
