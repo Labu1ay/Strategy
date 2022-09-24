@@ -547,3 +547,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectbleObject: {fileID: 3132069007992045934}
+--- !u!208 &6057214046678783609
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581650737374374498}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.3, y: 0.25, z: 0.3}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.1, y: 0.25, z: 0.1}
+  m_TimeToStationary: 0.5
