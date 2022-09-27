@@ -58,7 +58,7 @@ public class Management : MonoBehaviour {
             if (Input.GetMouseButtonUp(0)) {
                 if (hit.collider.tag == "Ground") {
                     for (int i = 0; i < ListOfSelected.Count; i++) {
-                        ListOfSelected[i].OnClickOnGround(hit.point);
+                        ListOfSelected[i].WhenClickOnGround(hit.point);
                     }
                 }
             }

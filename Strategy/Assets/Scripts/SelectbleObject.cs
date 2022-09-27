@@ -5,7 +5,7 @@ using UnityEngine;
 public class SelectbleObject : MonoBehaviour {
     public GameObject SelectbleIndicator;
 
-    void Start() {
+    public virtual void Start() {
         SelectbleIndicator.SetActive(false);
     }
     public virtual void OnHover() {
@@ -21,6 +21,6 @@ public class SelectbleObject : MonoBehaviour {
     public virtual void Unselect() {
         SelectbleIndicator.SetActive(false);
     }
-    public virtual void OnClickOnGround(Vector3 point) {
+    public virtual void WhenClickOnGround(Vector3 point) {
     }
 }
