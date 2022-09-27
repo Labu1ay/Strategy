@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour {
     public EnemyState CurrentEnemyState;
 
     public int Health;
+    private int _maxHealth;
     public Build TargetBuilding;
     public Unit TargetUnit;
     public float DistanceToFollow = 7f;
@@ -26,8 +27,16 @@ public class Enemy : MonoBehaviour {
     public float AttackPeriod = 1f;
     private float _timer;
 
+    public GameObject HealthBarPrefab;
+    private HealthBar _healthBar;
+
     private void Start() {
-        SetState(EnemyState.WalkToBuilding);  
+        SetState(EnemyState.WalkToBuilding);
+
+        _maxHealth = Health;
+        GameObject healthBar = Instantiate(HealthBarPrefab);
+        _healthBar = healthBar.GetComponent<HealthBar>();
+        _healthBar.Setup(transform);
     }
     void Update() {
         if (CurrentEnemyState == EnemyState.Idle) {
@@ -122,4 +131,12 @@ public class Enemy : MonoBehaviour {
         Handles.DrawWireDisc(transform.position, Vector3.up, DistanceToFollow);
     }
 #endif
+    public void TakeDamage(int damageValue) {
+        Health -= damageValue;
+        _healthBar.SetHealth(Health, _maxHealth);
+        if (Health <= 0) {
+            Destroy(_healthBar.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }
