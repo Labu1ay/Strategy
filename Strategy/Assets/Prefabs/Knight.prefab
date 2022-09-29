@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectbleIndicator: {fileID: 3704008677258857899}
-  Health: 5
+  Health: 6
   Price: 5
   NavMeshAgent: {fileID: 2639138512828754263}
   HealthBarPrefab: {fileID: 4318525430060706086, guid: 6363a0e474e26994b92b6466c92bc06a, type: 3}
@@ -72,7 +72,7 @@ NavMeshAgent:
   m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 0.15
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

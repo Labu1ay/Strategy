@@ -28,7 +28,10 @@ public class Unit : SelectbleObject {
         Health -= damageValue;
         _healthBar.SetHealth(Health, _maxHealth);
         if(Health <= 0) {
-            Destroy(_healthBar.gameObject);
+            if (_healthBar) {
+                Destroy(_healthBar.gameObject);
+            }
+            FindObjectOfType<Management>().Unselect(this);
             Destroy(gameObject);
         }
     }

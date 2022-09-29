@@ -40,9 +40,14 @@ public class Enemy : MonoBehaviour {
     }
     void Update() {
         if (CurrentEnemyState == EnemyState.Idle) {
+            FindClosestBuilding();
+            if (TargetBuilding) {
+                SetState(EnemyState.WalkToBuilding);
+            }
             FindClosestUnit();
         } else if (CurrentEnemyState == EnemyState.WalkToBuilding) {
             FindClosestUnit();
+            FindClosestBuilding();
             if(TargetBuilding == null) {
                 SetState(EnemyState.Idle);
             }
@@ -82,7 +87,12 @@ public class Enemy : MonoBehaviour {
 
         } else if (CurrentEnemyState == EnemyState.WalkToBuilding) {
             FindClosestBuilding();
-            NavMeshAgent.SetDestination(TargetBuilding.transform.position);
+            if (TargetBuilding) {
+                NavMeshAgent.SetDestination(TargetBuilding.transform.position);
+            } else {
+                SetState(EnemyState.Idle);
+            }
+            
         } else if (CurrentEnemyState == EnemyState.WalkToUnit) {
 
         } else if (CurrentEnemyState == EnemyState.Attack) {
@@ -135,7 +145,9 @@ public class Enemy : MonoBehaviour {
         Health -= damageValue;
         _healthBar.SetHealth(Health, _maxHealth);
         if (Health <= 0) {
-            Destroy(_healthBar.gameObject);
+            if (_healthBar) {
+                Destroy(_healthBar.gameObject);
+            }
             Destroy(gameObject);
         }
     }

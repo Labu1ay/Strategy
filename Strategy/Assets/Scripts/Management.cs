@@ -57,8 +57,18 @@ public class Management : MonoBehaviour {
         if (CurrentSelectionState == SelectionState.UnitsSelected) {
             if (Input.GetMouseButtonUp(0)) {
                 if (hit.collider.tag == "Ground") {
+
+                    int rowNumber = Mathf.CeilToInt(Mathf.Sqrt(ListOfSelected.Count));
+
+
                     for (int i = 0; i < ListOfSelected.Count; i++) {
-                        ListOfSelected[i].WhenClickOnGround(hit.point);
+
+                        int row = i / rowNumber;
+                        int column = i % rowNumber;
+
+                        Vector3 point = hit.point + new Vector3(row, 0f, column);
+
+                        ListOfSelected[i].WhenClickOnGround(point);
                     }
                 }
             }
@@ -116,6 +126,11 @@ public class Management : MonoBehaviour {
         }
     }
 
+    public void Unselect(SelectbleObject selectbleObject) {
+        if (ListOfSelected.Contains(selectbleObject)) {
+            ListOfSelected.Remove(selectbleObject);
+        }
+    }
 
 
     void UnselectAll() {
