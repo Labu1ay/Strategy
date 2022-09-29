@@ -10,6 +10,7 @@ public class Unit : SelectbleObject {
     public NavMeshAgent NavMeshAgent;
 
     public GameObject HealthBarPrefab;
+    public GameObject PointPrefab;
     private HealthBar _healthBar;
 
     public override void Start() {
@@ -21,7 +22,8 @@ public class Unit : SelectbleObject {
     }
     public override void WhenClickOnGround(Vector3 point) {
         base.WhenClickOnGround(point);
-
+        GameObject newPointPrefab = Instantiate(PointPrefab, point, Quaternion.identity);
+        Destroy(newPointPrefab, 0.5f);
         NavMeshAgent.SetDestination(point);
     }
     public void TakeDamage(int damageValue) {

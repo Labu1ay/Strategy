@@ -52,6 +52,7 @@ MonoBehaviour:
   Price: 5
   NavMeshAgent: {fileID: 2639138512828754263}
   HealthBarPrefab: {fileID: 4318525430060706086, guid: 6363a0e474e26994b92b6466c92bc06a, type: 3}
+  PointPrefab: {fileID: 5802728974965759661, guid: 5924e7de587b65c47ae134ab603d6164, type: 3}
   CurrentUnitState: 0
   TargetPoint: {x: 0, y: 0, z: 0}
   TargetEnemy: {fileID: 0}
